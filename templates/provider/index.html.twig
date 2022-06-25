@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Provider index{% endblock %}
+
+{% block body %}
+    <h1>Provider index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ProviderName</th>
+                <th>PhoneNumber</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for provider in providers %}
+            <tr>
+                <td>{{ provider.id }}</td>
+                <td>{{ provider.providerName }}</td>
+                <td>{{ provider.phoneNumber }}</td>
+                <td>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_provider_show', {'id': provider.id}) }}">show</a>
+                    <a href="{{ path('app_provider_edit', {'id': provider.id}) }}">edit</a>
+                {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_provider_new') }}">Create new</a>
+{% endblock %}

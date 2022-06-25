@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ship index{% endblock %}
+
+{% block body %}
+    <h1>Ship index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ShipName</th>
+                <th>MaxWeight</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ship in ships %}
+            <tr>
+                <td>{{ ship.id }}</td>
+                <td>{{ ship.shipName }}</td>
+                <td>{{ ship.maxWeight }}</td>
+                <td>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_ship_show', {'id': ship.id}) }}">show</a>
+                    <a href="{{ path('app_ship_edit', {'id': ship.id}) }}">edit</a>
+                {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ship_new') }}">Create new</a>
+{% endblock %}

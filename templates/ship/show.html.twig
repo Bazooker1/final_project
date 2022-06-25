@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ship{% endblock %}
+
+{% block body %}
+    <h1>Ship</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ship.id }}</td>
+            </tr>
+            <tr>
+                <th>ShipName</th>
+                <td>{{ ship.shipName }}</td>
+            </tr>
+            <tr>
+                <th>MaxWeight</th>
+                <td>{{ ship.maxWeight }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ship_index') }}">back to list</a>
+
+    <a href="{{ path('app_ship_edit', {'id': ship.id}) }}">edit</a>
+
+    {{ include('ship/_delete_form.html.twig') }}
+{% endblock %}
